@@ -1,0 +1,58 @@
+// Time: O(log(2 × 10⁹)) 
+// Space: O(1)
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    long long gcd(long long a, long long b) {
+        while (b != 0) {
+            long long temp = a % b;
+            a = b;
+            b = temp;
+        }
+        return a;
+    }
+
+    long long lcm(long long a, long long b) {
+        return (a / gcd(a, b)) * b;
+    }
+
+    bool check(long long mid, int divisor1, int divisor2,
+               int uniqueCnt1, int uniqueCnt2) {
+
+        long long LCM = lcm(divisor1, divisor2);
+
+        // Numbers not divisible by divisor1
+        long long count1 = mid - mid / divisor1;
+
+        // Numbers not divisible by divisor2
+        long long count2 = mid - mid / divisor2;
+
+        // Numbers not divisible by both divisors
+        long long common = mid - mid / LCM;
+
+        return (count1 >= uniqueCnt1 &&
+                count2 >= uniqueCnt2 &&
+                common >= (long long)uniqueCnt1 + uniqueCnt2);
+    }
+
+    int minimizeSet(int divisor1, int divisor2,
+                    int uniqueCnt1, int uniqueCnt2) {
+
+        long long left = 1;
+        long long right = 2000000000LL;
+
+        while (left < right) {
+            long long mid = left + (right - left) / 2;
+
+            if (check(mid, divisor1, divisor2,
+                      uniqueCnt1, uniqueCnt2))
+                right = mid;
+            else
+                left = mid + 1;
+        }
+
+        return (int)left;
+    }
+};
