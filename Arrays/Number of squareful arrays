@@ -1,0 +1,62 @@
+// Time: O(n! × n)
+// Space: O(n)
+#include <vector>
+#include <algorithm>
+#include <cmath>
+
+using namespace std;
+
+class Solution {
+public:
+    int ans = 0;
+
+    
+    bool isPerfectSquare(int x) {
+        int root = sqrt(x);
+        return root * root == x;
+    }
+
+    void backtrack(vector<int>& nums, vector<bool>& visited, vector<int>& current) {
+
+        
+        if (current.size() == nums.size()) {
+            ans++;
+            return;
+        }
+
+        for (int i = 0; i < nums.size(); i++) {
+
+           
+            if (visited[i])
+                continue;
+
+           
+            if (i > 0 && nums[i] == nums[i - 1] && !visited[i - 1])
+                continue;
+
+          
+            if (!current.empty() &&
+                !isPerfectSquare(current.back() + nums[i]))
+                continue;
+
+            visited[i] = true;
+            current.push_back(nums[i]);
+
+            backtrack(nums, visited, current);
+
+            current.pop_back();
+            visited[i] = false;
+        }
+    }
+
+    int numSquarefulPerms(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+
+        vector<bool> visited(nums.size(), false);
+        vector<int> current;
+
+        backtrack(nums, visited, current);
+
+        return ans;
+    }
+};
