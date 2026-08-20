@@ -23,13 +23,11 @@ public:
 
         long long LCM = lcm(divisor1, divisor2);
 
-        // Numbers not divisible by divisor1
+        
         long long count1 = mid - mid / divisor1;
-
-        // Numbers not divisible by divisor2
         long long count2 = mid - mid / divisor2;
 
-        // Numbers not divisible by both divisors
+    
         long long common = mid - mid / LCM;
 
         return (count1 >= uniqueCnt1 &&
