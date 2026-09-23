@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    string reorganizeString(string s) {
+        unordered_map<char, int> freq;
+
+        
+        for (char c : s) {
+            freq[c]++;
+        }
+
+       
+        priority_queue<pair<int, char>> pq;
+
+        for (auto &it : freq) {
+            pq.push({it.second, it.first});
+        }
+
+        string ans = "";
+
+        
+        while (pq.size() >= 2) {
+            auto first = pq.top();
+            pq.pop();
+
+            auto second = pq.top();
+            pq.pop();
+
+            int freq1 = first.first;
+            char char1 = first.second;
+
+            int freq2 = second.first;
+            char char2 = second.second;
+
+            ans += char1;
+            ans += char2;
+
+            freq1--;
+            freq2--;
+
+            if (freq1 > 0) {
+                pq.push({freq1, char1});
+            }
+
+            if (freq2 > 0) {
+                pq.push({freq2, char2});
+            }
+        }
+
+        
+        if (!pq.empty()) {
+            auto last = pq.top();
+
+            int f = last.first;
+            char c = last.second;
+
+            
+            if (f > 1) {
+                return "";
+            }
+
+            
+            if (!ans.empty() && ans.back() == c) {
+                return "";
+            }
+
+            ans += c;
+        }
+
+        return ans;
+    }
+};
+
+int main() {
+    Solution obj;
+
+    string s;
+    cin >> s;
+
+    cout << obj.reorganizeString(s) << endl;
+
+    return 0;
+}
+// Time: O(n log k)
+// Space: O(k)
+// concept of Max Heap 
