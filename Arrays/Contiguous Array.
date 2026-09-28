@@ -52,3 +52,14 @@ int main() {
 }
 // Time  : O(n)
 // Space : O(n)
+
+// Prefix Sum + HashMap
+
+// 0 → -1
+// 1 → +1
+
+// same prefix sum → balanced subarray
+
+// store FIRST occurrence of sum
+
+mp[0] = -1
