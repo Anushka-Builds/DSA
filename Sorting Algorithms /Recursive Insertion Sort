@@ -3,27 +3,22 @@
 #include <vector>
 using namespace std;
 
-// Recursive Insertion Sort
+
 void recursiveInsertionSort(vector<int>& arr, int n) {
-    // Base case: if the array has 0 or 1 element, it is sorted
     if (n <= 1) {
         return;
     }
 
-    // Sort the first n-1 elements recursively
     recursiveInsertionSort(arr, n - 1);
 
-    // Insert the last element into its correct position
     int last = arr[n - 1];
     int j = n - 2;
 
-    // Shift elements greater than 'last' one position to the right
     while (j >= 0 && arr[j] > last) {
         arr[j + 1] = arr[j];
         j--;
     }
 
-    // Place 'last' in its correct position
     arr[j + 1] = last;
 }
 
@@ -55,3 +50,5 @@ int main() {
     cout << '\n';
     return 0;
 }
+
+// Time: (O(n^2))
