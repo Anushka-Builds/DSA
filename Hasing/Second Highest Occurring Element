@@ -1,0 +1,71 @@
+
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+int secondHighestOccurringElement(vector<int>& arr) {
+    unordered_map<int, int> freq;
+
+    for (int i = 0; i < arr.size(); i++) {
+        freq[arr[i]]++;
+    }
+
+    int highestFreq = 0;
+    int secondHighestFreq = 0;
+
+    int highestElement = -1;
+    int secondHighestElement = -1;
+
+for (int i = 0; i < arr.size(); i++) {
+        int element = arr[i];
+        int frequency = freq[element];
+
+        if (frequency > highestFreq) {
+            secondHighestFreq = highestFreq;
+            secondHighestElement = highestElement;
+
+            highestFreq = frequency;
+            highestElement = element;
+        }
+        else if (frequency < highestFreq &&
+                 frequency > secondHighestFreq) {
+            secondHighestFreq = frequency;
+            secondHighestElement = element;
+        }
+    }
+
+    return secondHighestElement;
+}
+
+int main() {
+    int n;
+
+    cout << "Enter the number of elements: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Please enter a positive array size.\n";
+        return 1;
+    }
+
+    vector<int> arr(n);
+
+    cout << "Enter the array elements: ";
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    int result = secondHighestOccurringElement(arr);
+
+    if (result == -1) {
+        cout << "No second highest occurring element exists.\n";
+    } else {
+        cout << "Second highest occurring element: "
+             << result << '\n';
+    }
+
+    return 0;
+}
+// Time: O(n) 
+// Space: O(k)
