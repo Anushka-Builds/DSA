@@ -31,3 +31,6 @@ int main() {
 
     return 0;
 }
+// Complexity	Value
+Time	(O(log n))
+Extra Space	(O(1))
