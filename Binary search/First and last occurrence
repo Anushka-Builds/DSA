@@ -72,3 +72,8 @@ int main() {
 }
 // First occurrence = Lower Bound.
 // Last occurrence = Upper Bound - 1.
+
+// First Binary Search	(O(log n))
+// Second Binary Search	(O(log n))
+// Total Time	(O(log n))
+// Auxiliary Space	(O(1))
