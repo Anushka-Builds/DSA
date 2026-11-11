@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -58,3 +57,7 @@ int main() {
 
     return 0;
 }
+// Complexity	Value
+// Average/Best Time	(O(log n))
+// Worst-case Time	(O(n))
+// Extra Space	(O(1))
