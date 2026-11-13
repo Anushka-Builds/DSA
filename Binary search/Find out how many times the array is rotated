@@ -1,0 +1,53 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int findKRotation(vector<int>& nums) {
+
+    int low = 0;
+    int high = nums.size() - 1;
+
+    int ans = INT_MAX;
+    int index = -1;
+
+    while (low <= high) {
+
+        int mid = low + (high - low) / 2;
+
+        // Left half is sorted
+        if (nums[low] <= nums[mid]) {
+
+            if (nums[low] < ans) {
+                ans = nums[low];
+                index = low;
+            }
+
+            low = mid + 1;
+        }
+
+        // Right half is sorted
+        else {
+
+            if (nums[mid] < ans) {
+                ans = nums[mid];
+                index = mid;
+            }
+
+            high = mid - 1;
+        }
+    }
+
+    return index;
+}
+
+int main() {
+
+    vector<int> nums = {5, 6, 1, 2, 3, 4};
+
+    cout << findKRotation(nums);
+
+    return 0;
+}
+// Complexity	Value
+// Time	(O(log n))
+// Auxiliary Space	(O(1))
