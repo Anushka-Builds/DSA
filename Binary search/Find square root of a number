@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+
+class Solution {
+public:
+    int floorSqrt(int n) {
+
+        int low = 1;
+        int high = n;
+        int ans = 0;
+
+        while (low <= high) {
+
+            int mid = low + (high - low) / 2;
+
+            long long square = 1LL * mid * mid;
+
+            if (square == n) {
+                return mid;
+            }
+
+            else if (square < n) {
+                ans = mid;
+                low = mid + 1;
+            }
+
+            else {
+                high = mid - 1;
+            }
+        }
+
+        return ans;
+    }
+};
+
+int main() {
+
+    int n = 28;
+
+    Solution obj;
+
+    cout << "Square root = " << obj.floorSqrt(n);
+
+    return 0;
+}
+
+// Complexity	Value
+// Time	O(log n)
+// Space	O(1)
