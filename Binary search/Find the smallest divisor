@@ -1,0 +1,57 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+
+    int calculateSum(vector<int>& nums, int divisor) {
+        int sum = 0;
+
+        for (int i = 0; i < nums.size(); i++) {
+            sum += (nums[i] + divisor - 1) / divisor;
+        }
+
+        return sum;
+    }
+
+    int smallestDivisor(vector<int>& nums, int limit) {
+
+        int low = 1;
+        int high = *max_element(nums.begin(), nums.end());
+
+        int ans = -1;
+
+        while (low <= high) {
+
+            int mid = low + (high - low) / 2;
+
+            int sum = calculateSum(nums, mid);
+
+            if (sum <= limit) {
+                ans = mid;
+                high = mid - 1;
+            }
+            else {
+                low = mid + 1;
+            }
+        }
+
+        return ans;
+    }
+};
+
+int main() {
+
+    vector<int> nums = {1, 2, 5, 9};
+    int limit = 6;
+
+    Solution obj;
+
+    cout << obj.smallestDivisor(nums, limit);
+
+    return 0;
+}
+// Time Complexity: (O(n * log(max)))
+Space Complexity: (O(1)) auxiliary space.
